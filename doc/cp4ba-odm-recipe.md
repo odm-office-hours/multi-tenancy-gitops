@@ -34,16 +34,18 @@ This recipe is for deploying the Operational Desision Manager in a single namesp
     | ODM | RWO | ibmc-block-gold <br/> managed-nfs-storage | ocs-storagecluster-ceph-rbd |
 
     Changing the storage classes are performed in the following files:
+    ```
     - multi-tenancy-gitops-services/instances/ibm-cp4ba-icp4acluster/odm/odm-deploy.yaml
     - multi-tenancy-gitops-services/instances/ibm-cp4ba-db2ucluster/db2-instance/db2-instance.yaml
     - multi-tenancy-gitops-services/instances/ibm-cp4ba-openldap-odm/deployment/ldap-statefulset.yaml
-
+    ```
 1. These instructions are assuming that all the user created has the password of `Passw0rd`. changing this default can be performed in the following files:
+    ```
     - multi-tenancy-gitops-services/instances/ibm-cp4ba-openldap-odm/configmaps/cm-customdif-stack-ha.yaml
     - multi-tenancy-gitops-services/instances/ibm-cp4ba-icp4acluster/odm/ibm-ban-secret.yaml
     - multi-tenancy-gitops-services/instances/ibm-cp4ba-db2u-setup/setup-script.yaml
     - multi-tenancy-gitops-services/instances/ibm-cp4ba-icp4acluster/odm/odm-db-secret.yaml
-
+    ```
 1. 1. Modify the console link properties with the proper CloudPak for Business Automation link in the `multi-tenancy-gitops-services` repository, make sure that you are already **logged in** your cluster:
 
     ```bash
