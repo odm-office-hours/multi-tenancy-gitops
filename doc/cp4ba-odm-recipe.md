@@ -29,10 +29,14 @@ This recipe is for deploying the Operational Desision Manager in a single namesp
     | --- | --- | --- | --- |
     | DB2 | RWX | ibmc-file-gold-gid | ocs-storagecluster-cephfs |
     | ODM | RWX | ibmc-file-gold-gid | ocs-storagecluster-cephfs |
+    | LDAP | RWX | ibmc-file-gold <br/> managed-nfs-storage | ocs-storagecluster-cephfs |
+    | ODM | RWX | ibmc-file-gold-gid <br/> managed-nfs-storage | ocs-storagecluster-cephfs |
+    | ODM | RWO | ibmc-block-gold <br/> managed-nfs-storage | ocs-storagecluster-ceph-rbd |
 
-    Changing the storage classes is performed in:
-    - multi-tenancy-gitops-services/instances/ibm-icp4acluster/odm/odm-deploy.yaml
+    Changing the storage classes are performed in the following files:
+    - multi-tenancy-gitops-services/instances/ibm-cp4ba-icp4acluster/odm/odm-deploy.yaml
     - multi-tenancy-gitops-services/instances/ibm-cp4ba-db2ucluster/db2-instance/db2-instance.yaml
+    - multi-tenancy-gitops-services/instances/ibm-cp4ba-openldap-odm/deployment/ldap-statefulset.yaml
 
 1. These instructions are assuming that all the user created has the password of `Passw0rd`. changing this default can be performed in the following files:
     - multi-tenancy-gitops-services/instances/ibm-cp4ba-openldap-odm/configmaps/cm-customdif-stack-ha.yaml
@@ -40,10 +44,10 @@ This recipe is for deploying the Operational Desision Manager in a single namesp
     - multi-tenancy-gitops-services/instances/ibm-cp4ba-db2u-setup/setup-script.yaml
     - multi-tenancy-gitops-services/instances/ibm-cp4ba-icp4acluster/odm/odm-db-secret.yaml
 
-1. Modify the console link properties with the proper CloudPak for Business Automation link in the `multi-tenancy-gitops-services` repository, make sure your *`logged in into your cluster`*:
+1. 1. Modify the console link properties with the proper CloudPak for Business Automation link in the `multi-tenancy-gitops-services` repository, make sure that you are already **logged in** your cluster:
 
     ```bash
-    cd multi-tenancy-gitops-servicces/instances/ibm-cp4ba-icp4acluster-postdeploy/post-deploy
+    cd multi-tenancy-gitops-services/instances/ibm-cp4ba-icp4acluster-postdeploy/post-deploy
     ```
     ```
     NAMESPACE=cp4ba ./console.sh
@@ -56,7 +60,7 @@ This recipe is for deploying the Operational Desision Manager in a single namesp
     ```yaml
     ## IBM DB2 operator & instance, Ldap
     - argocd/operators/ibm-cp4ba-db2.yaml
-    - argocd/instances/cp4ba-db2-instance.yaml
+    - argocd/instances/ibm-cp4ba-db2ucluster.yaml
     - argocd/instances/ibm-cp4ba-db2u-setup.yaml
     - argocd/instances/ibm-cp4ba-openldap-odm.yaml
     ## IBM CP4BA operator
